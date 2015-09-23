@@ -25,5 +25,9 @@ In the Brackets editor, select/highlight the property or method that you want to
 As you can see from the example, all properties and methods will be labeled as *private*. The extension has no real way of telling if a property is private or not, so by default it labels everything as *private*. The assumption is that it is easier to remove the tag than it is to type it in. For similar reasons, all parameter types are *Objects* and you will need to edit this if that is wrong. Likewise, the description will also need to be edited and a decision made whether you need the return tag and, if so, whether you want a description for the return.
 
 
-<div style="text-align:center;margin-bottom:20px;">![Screenshot 1](https://raw.githubusercontent.com/SteveMcArthur/brackets-yuidoc/master/screenshot1.jpg)</div>
-<div style="text-align:center;">![Screenshot 2](https://raw.githubusercontent.com/SteveMcArthur/brackets-yuidoc/master/screenshot2.jpg)</div>
+<div style="text-align:center;margin-bottom:20px;">
+![Screenshot 1](https://raw.githubusercontent.com/SteveMcArthur/brackets-yuidoc/master/screenshot1.jpg)
+</div>
+<div style="text-align:center;">
+![Screenshot 2](https://raw.githubusercontent.com/SteveMcArthur/brackets-yuidoc/master/screenshot2.jpg)
+</div>
