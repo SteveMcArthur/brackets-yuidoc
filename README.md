@@ -1,7 +1,7 @@
 # Brackets-yuidoc
 
 
-[Brackets](http://brackets.io/) extension for inserting [YUIDoc](http://yui.github.io/yuidoc/syntax/) comment blocks. 
+[Brackets](http://brackets.io/) extension for inserting [YUIDoc](http://yui.github.io/yuidoc/syntax/) comment blocks. Works with JS, CoffeeScript and ES6.
 
 ## Usage
 
