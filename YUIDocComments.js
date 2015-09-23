@@ -80,7 +80,7 @@ define(function (require, exports) {
 		var propertyIndex = text.indexOf(":"); //coffeescript
 		//special case for coffeescript
 		if (propertyIndex > -1) {
-			name = name.substr(0, propertyIndex).trim();
+			name = text.substr(0, propertyIndex).trim();
 			return name;
 		}
 		var proto = protoReg.exec(text);
