@@ -51,10 +51,7 @@ define(function (require, exports) {
 		returnStr = indent + t + "@return {Object} description\n";
 		closer = endTag;
 		constr = indent + t + "@constructor\n";
-
 	}
-
-
 
 	/**
 	 * Works out what the indentation is at the begining of the line.
@@ -93,9 +90,7 @@ define(function (require, exports) {
 
 	}
 
-
 	var paramReg = new RegExp(/\(.+\)/);
-
 
 	/**
 	* Extracts an array of parameter names
@@ -178,7 +173,6 @@ define(function (require, exports) {
 		return paramStr;
 	}
 
-
 	/**
 	* Class for building YUIdoc comment block
 	* @class YUIDoc
@@ -187,8 +181,6 @@ define(function (require, exports) {
 	function YUIDoc() {
 		var editor = EditorManager.getCurrentFullEditor();
 		this.doc = editor.document;
-		//editor.convertToLineSelections();
-		//this.start = editor.getCursorPos();
 		var sel = editor.getSelection();
 		this.start = sel.start;
 		this.end = sel.end;
@@ -238,21 +230,16 @@ define(function (require, exports) {
 
 		console.log(txt);
 		this.doc.replaceRange(txt, this.start, this.end);
-
 	};
 	
-
 	/**
-	* Description for createYUIdocProperty
-	* @private
+	* Entry point for the extension
 	* @method createYUIdocProperty
-	* @return {Object} description
 	*/
 	function createYUIdocProperty() {
 		var yui = new YUIDoc();
 		yui.writeBlock();		
 	}
-
 
 	exports.createYUIdocProperty = createYUIdocProperty;
 
