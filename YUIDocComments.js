@@ -65,7 +65,40 @@ define(function (require, exports) {
 		return indent;
 	}
 
+	/**
+	 * get name  like this 'this.init : function () {'
+	 * 
+	 * @private
+	 * @method getName2
+	 * @param {Object} s
+	 * @return {Object} description
+	 */
+	function getName2(s) {
+		if (s.indexOf('function') > -1) {
+			if (s.indexOf('=') > -1) {
+				var s1 = s.split('=');
+				if (s1[0].indexOf('.') > -1) {
+					var s12 = s1[0].split('.');
+					return s12[1];
+				} else {
+					return s1[0];
+				}
+			} else if (s.indexOf(':') > -1) {
+				var s1 = s.split(':');
+				if (s1[0].indexOf('.') > -1) {
+					var s12 = s1[0].split('.');
+					return s12[1];
+				} else {
+					return s1[0];
+				}
 
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 	/**
 	 * Extract the property or method name
 	 * @method getName
@@ -78,14 +111,22 @@ define(function (require, exports) {
 		//special case for coffeescript
 		if (propertyIndex > -1) {
 			name = text.substr(0, propertyIndex).trim();
+			if (name.indexOf('.') - 1) {
+				name = name.substr(name.indexOf('.') + 1, name.length).trim();
+			}
 			return name;
 		}
 		var proto = protoReg.exec(text);
-		if(proto){
+		if (proto) {
 			return proto[1];
 		}
 		var match = nameReg.exec(text);
-		var name = match[1];
+		var name = null;
+		if (match && match[1]) {
+			name = match[1];
+		} else {
+			name = getName2(line)
+		}
 		return name;
 
 	}
@@ -93,11 +134,11 @@ define(function (require, exports) {
 	var paramReg = new RegExp(/\(.+\)/);
 
 	/**
-	* Extracts an array of parameter names
-	* @method getParams
-	* @param {String} line the current line
-	* @return {Array} string array of parameter names
-	*/
+	 * Extracts an array of parameter names
+	 * @method getParams
+	 * @param {String} line the current line
+	 * @return {Array} string array of parameter names
+	 */
 	function getParams(line) {
 		var params = paramReg.exec(line);
 		var args = [];
@@ -117,13 +158,13 @@ define(function (require, exports) {
 
 
 	/**
-	* Determines the property type
-	* and returns its string name: method
-	* class or property.
-	* @method getPropertyOrClass
-	* @param {String} line the current line
-	* @return {String} the property type
-	*/
+	 * Determines the property type
+	 * and returns its string name: method
+	 * class or property.
+	 * @method getPropertyOrClass
+	 * @param {String} line the current line
+	 * @return {String} the property type
+	 */
 	function getPropertyOrClass(line) {
 		var propertyStr = "property";
 		var text = line.trim();
@@ -138,12 +179,12 @@ define(function (require, exports) {
 	}
 
 	/**
-	* For a class, returns the name
-	* of the inherited class, if any.
-	* @method getExtensionClass
-	* @param {String} line the current line
-	* @return {String} the name of the base class
-	*/
+	 * For a class, returns the name
+	 * of the inherited class, if any.
+	 * @method getExtensionClass
+	 * @param {String} line the current line
+	 * @return {String} the name of the base class
+	 */
 	function getExtensionClass(line) {
 		var text = line.trim();
 		var ext = text.indexOf("extends");
@@ -156,14 +197,14 @@ define(function (require, exports) {
 	}
 
 	/**
-	* Given an array of parameter names,
-	* return the comment string for YUIdocs
-	* @method getParamStr
-	* @param {Array} params string array of parameter names
-	* @param {String} indent
-	* @return {String} the parameter string
-	*/
-	function getParamStr(params,indent) {
+	 * Given an array of parameter names,
+	 * return the comment string for YUIdocs
+	 * @method getParamStr
+	 * @param {Array} params string array of parameter names
+	 * @param {String} indent
+	 * @return {String} the parameter string
+	 */
+	function getParamStr(params, indent) {
 		var paramStr = "";
 		if (params.length > 0) {
 			params.forEach(function (item) {
@@ -174,17 +215,17 @@ define(function (require, exports) {
 	}
 
 	/**
-	* Class for building YUIdoc comment block
-	* @class YUIDoc
-	* @constructor
-	*/
+	 * Class for building YUIdoc comment block
+	 * @class YUIDoc
+	 * @constructor
+	 */
 	function YUIDoc() {
 		var editor = EditorManager.getCurrentFullEditor();
 		this.doc = editor.document;
 		var sel = editor.getSelection();
 		this.start = sel.start;
 		this.end = sel.end;
-		
+
 		var line = this.doc.getLine(this.start.line);
 		this.indent = calculateIndent(line);
 		setTags(this.indent, editor);
@@ -196,10 +237,10 @@ define(function (require, exports) {
 	}
 
 	/**
-	* Writes out the YUIDoc comment block
-	* to the editor
-	* @method writeBlock
-	*/
+	 * Writes out the YUIDoc comment block
+	 * to the editor
+	 * @method writeBlock
+	 */
 	YUIDoc.prototype.writeBlock = function () {
 		var output = yuiProp;
 		var outCloser = closer;
@@ -214,31 +255,31 @@ define(function (require, exports) {
 
 		output = output.replace(/%p/g, this.propertyType);
 		output = output.replace(/%n/g, this.name);
-		output += getParamStr(this.params,this.indent);
+		output += getParamStr(this.params, this.indent);
 		var closed = "";
 		if (this.propertyType === "method") {
 			closed = returnStr;
 		}
 		var selectedText = this.line.trim();
-		console.log("("+outCloser+")");
-		console.log("("+output+")");
-		
-		
+		console.log("(" + outCloser + ")");
+		console.log("(" + output + ")");
+
+
 		closed += outCloser + this.indent;
-		var txt = output + closed  + selectedText;
-		
+		var txt = output + closed + selectedText;
+
 
 		console.log(txt);
 		this.doc.replaceRange(txt, this.start, this.end);
 	};
-	
+
 	/**
-	* Entry point for the extension
-	* @method createYUIdocProperty
-	*/
+	 * Entry point for the extension
+	 * @method createYUIdocProperty
+	 */
 	function createYUIdocProperty() {
 		var yui = new YUIDoc();
-		yui.writeBlock();		
+		yui.writeBlock();
 	}
 
 	exports.createYUIdocProperty = createYUIdocProperty;
