@@ -1,6 +1,6 @@
 {
 	"name": "brackets-yuidoc-ext",
-	"title": "YUIDoc comments inserter",
+	"title": "YUIDoc comments inserter ext",
 	"description": "Inserts YUIDoc comment blocks when you select/highlight a function or property. Use Ctr+Alt+Y and a YUIDoc comment block will be inserted with the correct function/property names. Provides the starting framework within which you can then edit things such as description. Works with JS, CoffeeScript and ES6.base https://github.com/SteveMcArthur/brackets-yuidoc.",
 	"homepage": "https://github.com/zhaopengme/brackets-yuidoc-ext",
 	"author": "mikey.zhaopeng (http://zhaopeng.me)",
