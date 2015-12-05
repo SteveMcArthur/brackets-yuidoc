@@ -18,6 +18,7 @@ define(function (require, exports) {
 	var whitespace = new RegExp(/^\s+/);
 	var nameReg = new RegExp(/^\w+\s(\w+)[\s|\(|=]/);
 	var protoReg = new RegExp(/^\w+\.prototype\.(\w+)[\s|\(|=]/);
+	var thisReg = new RegExp(/^this\.(\w+)\s*[=|:]/);
 
 	/**
 	 * Sets the YUIdoc comment tag type:
@@ -74,15 +75,22 @@ define(function (require, exports) {
 	 */
 	function getName(line) {
 		var text = line.trim();
+		
+		var thisMatch = thisReg.exec(text);
+		if(thisMatch){
+			return thisMatch[1];
+		}
+		
+		
 		var propertyIndex = text.indexOf(":"); //coffeescript
 		//special case for coffeescript
 		if (propertyIndex > -1) {
 			name = text.substr(0, propertyIndex).trim();
 			return name;
 		}
-		var proto = protoReg.exec(text);
-		if(proto){
-			return proto[1];
+		var protoMatch = protoReg.exec(text);
+		if(protoMatch){
+			return protoMatch[1];
 		}
 		var match = nameReg.exec(text);
 		var name = match[1];
