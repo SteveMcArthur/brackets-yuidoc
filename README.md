@@ -7,7 +7,9 @@
 
 
 In the Brackets editor, select/highlight the property or method that you want to document then either select from the edit menu "Insert YUIDoc property" or use the shortcut keys Ctrl+Alt+Y. A YUIdoc comment block *boilerplate* will be inserted with property/method names etc filled in.
-```
+
+### JavaScript
+```js
 	/**
 	* Description for myMethod
 	* @private
@@ -20,6 +22,34 @@ In the Brackets editor, select/highlight the property or method that you want to
 		var result = something + somethingElse;
 		return result;	
 	}
+```
+### CoffeeScript
+```coffee
+	###*
+	# Description for MyClass
+	# @class MyClass
+	# @constructor
+	# @extends someOtherBaseClass.AnotherClass
+	###
+	class MyClass extends someOtherBaseClass.AnotherClass
+	
+		###*
+		# Description for someProperty
+		# @private
+		# @property someProperty
+		###
+		someProperty: 'My Property'
+	
+		###*
+		# Description for myMethod
+		# @private
+		# @method myMethod
+		# @param {Object} something
+		# @param {Object} somethingElse
+		# @return {Object} description
+		###
+		myMethod: (something,somethingElse) ->
+			return something + somethingElse
 ```
 
 As you can see from the example, all properties and methods will be labeled as *private*. The extension has no real way of telling if a property is private or not, so by default it labels everything as *private*. The assumption is that it is easier to remove the tag than it is to type it in. For similar reasons, all parameter types are *Objects* and you will need to edit this if that is wrong. Likewise, the description will also need to be edited and a decision made whether you need the return tag and, if so, whether you want a description for the return.
