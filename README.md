@@ -46,7 +46,7 @@ In the Brackets editor, select/highlight the property or method that you want to
 		*/
 		this.classMethod = function(){
 			return this.somethingElse;
-		}
+		};
 	}
 
 	/**
@@ -57,7 +57,17 @@ In the Brackets editor, select/highlight the property or method that you want to
 	*/
 	var myOtherClass = function () {
 
-	}
+	};
+	
+	/**
+	* Description for anotherMethod
+	* @private
+	* @method anotherMethod
+	* @return {Object} description
+	*/
+	myOtherClass.prototype.anotherMethod = function(){
+		return this.somethingElse;
+	};
 ```
 ### CoffeeScript
 ```coffee

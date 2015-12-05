@@ -8,7 +8,7 @@ function MyClass(something, somethingElse) {
 	this.somethingElse = somethingElse;
 	this.classMethod = function(){
 		return this.something;
-	}
+	};
 }
 
 var myOtherClass = function (something, somethingElse) {
@@ -16,5 +16,9 @@ var myOtherClass = function (something, somethingElse) {
 	this.somethingElse = somethingElse;
 	this.classMethod = function(){
 		return this.something;
-	}
-}
+	};
+};
+
+myOtherClass.prototype.anotherMethod = function(){
+	return this.somethingElse;
+};
