@@ -18,9 +18,45 @@ In the Brackets editor, select/highlight the property or method that you want to
 	* @param {Object} somethingElse
 	* @return {Object} description
 	*/
-	function myMethod(something, somethingElse){
+	function myMethod(something, somethingElse) {
 		var result = something + somethingElse;
-		return result;	
+		return result;
+	}
+
+	/**
+	* Description for MyClass
+	* @private
+	* @method MyClass
+	* @param {Object} something
+	* @param {Object} somethingElse
+	* @return {Object} description
+	*/
+	function MyClass(something, somethingElse) {
+		/**
+		* Description for something
+		* @private
+		* @property something
+		*/
+		this.something = something;
+		/**
+		* Description for classMethod
+		* @private
+		* @method classMethod
+		* @return {Object} description
+		*/
+		this.classMethod = function(){
+			return this.somethingElse;
+		}
+	}
+
+	/**
+	* Description for myOtherClass
+	* @private
+	* @method myOtherClass
+	* @return {Object} description
+	*/
+	var myOtherClass = function () {
+
 	}
 ```
 ### CoffeeScript
