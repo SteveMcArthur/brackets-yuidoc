@@ -20,5 +20,8 @@
         "type": "git",
         "url": "git@github.com:SteveMcArthur/brackets-yuidoc.git"
     },
+	"bugs": {
+    	"url": "https://github.com/SteveMcArthur/brackets-yuidoc/issues"
+  	},
     "version": "1.0.2"
 }
