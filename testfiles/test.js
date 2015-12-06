@@ -22,3 +22,7 @@ var myOtherClass = function (something, somethingElse) {
 myOtherClass.prototype.anotherMethod = function(){
 	return this.somethingElse;
 };
+
+myOtherClass.someotherMethod = function(){
+	return this.somethingElse;
+};

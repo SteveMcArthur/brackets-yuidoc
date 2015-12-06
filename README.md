@@ -68,6 +68,16 @@ In the Brackets editor, select/highlight the property or method that you want to
 	myOtherClass.prototype.anotherMethod = function(){
 		return this.somethingElse;
 	};
+	
+	/**
+	* Description for someotherMethod
+	* @private
+	* @method someotherMethod
+	* @return {Object} description
+	*/
+	myOtherClass.someotherMethod = function(){
+		return this.somethingElse;
+	};
 ```
 ### CoffeeScript
 ```coffee

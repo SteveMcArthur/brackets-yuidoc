@@ -16,7 +16,7 @@ define(function (require, exports) {
 	var priv = "";
 
 	var whitespace = new RegExp(/^\s+/);
-	var nameReg = new RegExp(/^\w+\s(\w+)[\s|\(|=]/);
+	var nameReg = new RegExp(/^\w+[\s|\.](\w+)[\s|\(|=]/);
 	var protoReg = new RegExp(/^\w+\.prototype\.(\w+)[\s|\(|=]/);
 	var thisReg = new RegExp(/^this\.(\w+)\s*[=|:]/);
 
@@ -93,8 +93,9 @@ define(function (require, exports) {
 			return protoMatch[1];
 		}
 		var match = nameReg.exec(text);
-		var name = match[1];
-		return name;
+		if(match){
+			return match[1];
+		}
 
 	}
 
