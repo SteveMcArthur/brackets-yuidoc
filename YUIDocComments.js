@@ -80,13 +80,11 @@ define(function (require, exports) {
 		if(thisMatch){
 			return thisMatch[1];
 		}
-		
-		
+			
 		var propertyIndex = text.indexOf(":"); //coffeescript
 		//special case for coffeescript
 		if (propertyIndex > -1) {
-			name = text.substr(0, propertyIndex).trim();
-			return name;
+			return text.substr(0, propertyIndex).trim();
 		}
 		var protoMatch = protoReg.exec(text);
 		if(protoMatch){
@@ -229,15 +227,12 @@ define(function (require, exports) {
 			closed = returnStr;
 		}
 		var selectedText = this.line.trim();
-		console.log("("+outCloser+")");
-		console.log("("+output+")");
 		
 		
 		closed += outCloser + this.indent;
 		var txt = output + closed  + selectedText;
 		
 
-		console.log(txt);
 		this.doc.replaceRange(txt, this.start, this.end);
 	};
 	

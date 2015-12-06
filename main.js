@@ -1,3 +1,10 @@
+/*!
+* Brackets extension to generate YUIDoc comment blocks
+*
+* @author Steve McArthur
+* @license http://opensource.org/licenses/MIT
+*/
+
 /* global define, brackets */
 define(function (require) {
     "use strict";
